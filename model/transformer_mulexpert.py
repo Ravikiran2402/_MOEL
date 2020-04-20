@@ -584,7 +584,10 @@ class Transformer_experts(nn.Module):
         
         if(config.oracle): attention_parameters = self.attention_activation(torch.FloatTensor(batch['target_program'])*1000).cuda()
         attention_parameters = attention_parameters.unsqueeze(-1).unsqueeze(-1) # (batch_size, expert_num, 1, 1)
-
+        
+        #print("Attention Parameters : ")
+        #print(attention_parameters)
+        
         ys = torch.ones(1, 1).fill_(config.SOS_idx).long()
         if config.USE_CUDA:
             ys = ys.cuda()
